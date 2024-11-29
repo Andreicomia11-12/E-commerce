@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast, Toaster } from 'sonner';
+import { toast, Toaster, ToastContainer } from 'sonner';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Loader from '../layouts/loader';
@@ -22,10 +22,22 @@ const Login = () => {
     const { isAuthenticated, error, loading } = useSelector((state) => state.auth);
 
     useEffect(() => {
+        // Redirect to homepage if authenticated
         if (isAuthenticated) {
-            navigate('/'); // Redirect to homepage on successful login
+            console.log('User logged in successfully');
+            toast.success('Logged in successfully!', {
+                duration: 3000, // Optional: duration of success message
+                style: { zIndex: 9999 },
+            });
+        
+            // Delay navigation
+            setTimeout(() => {
+                navigate('/');
+            }, 800);
         }
-
+        
+        
+        // Check if there's an error and no toast has been triggered yet
         if (error && !hasErrorToast) {
             // Display specific warnings for errors
             if (error === 'Invalid email or password') {
@@ -44,9 +56,18 @@ const Login = () => {
                     style: { zIndex: 9999 },
                 });
             }
-
+        
+            // Clear errors after showing the toast
             dispatch(clearErrors());
-            setHasErrorToast(true); // Prevent re-triggering of the toast
+        
+            // Set flag to prevent re-triggering of the toast
+            setHasErrorToast(true);
+        }
+        
+    
+        // Reset hasErrorToast when error changes
+        if (error === null) {
+            setHasErrorToast(false); // Reset flag to allow future error to trigger toast
         }
     }, [dispatch, hasErrorToast, isAuthenticated, error, navigate]);
 
@@ -58,8 +79,7 @@ const Login = () => {
     return (
         <Fragment>
             <Toaster 
-                position="top-right" 
-                limit={10} // Display only one toast at a time
+            position='top-center'
             />
             {loading ? (
                 <Loader />

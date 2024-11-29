@@ -8,6 +8,8 @@ import {
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
     LOAD_USER_FAILED,
+    LOGOUT_SUCCESS,
+    LOGOUT_FAILED,
     CLEAR_ERRORS
 } from '../constants/userConstants'
 
@@ -30,7 +32,15 @@ export const authReducer = (state = { user: {} }, action) => {
                 ...state,
                 loading: false,
                 isAuthenticated: true,
-                user: action.payload
+                user: action.payload,
+                error: null
+            }
+
+        case LOGOUT_SUCCESS:
+            return{
+                loading: false,
+                isAuthenticated: false,
+                user: null,
             }
         
         case LOAD_USER_FAILED:
@@ -39,6 +49,12 @@ export const authReducer = (state = { user: {} }, action) => {
                 isAuthenticated: false,
                 user: null,
                 error: action.payload
+            }
+
+        case LOGOUT_FAILED:
+            return {
+                ...state,
+                error: action.payload      
             }
 
         case LOGIN_FAILED:
@@ -58,6 +74,14 @@ export const authReducer = (state = { user: {} }, action) => {
                 error: null
             }
         default: 
+            return state;
+    }
+}
+
+export const userReducer = (state, {}, action) => {
+    switch (action.type) {
+
+        default:
             return state;
     }
 }

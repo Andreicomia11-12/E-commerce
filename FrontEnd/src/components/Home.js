@@ -22,15 +22,6 @@ const Home = () => {
     const { keyword = "" } = useParams(); // Use useParams for React Router v6
 
     useEffect(() => {
-        if (error && !hasErrorToast) {
-            toast.error(`Error: ${error}`, {
-                duration: Infinity, // Make the toast stay until dismissed
-                style: {
-                    zIndex: 9999,
-                },
-            });
-            setHasErrorToast(true); // Ensure the toast doesn't re-trigger
-        }
         dispatch(getProducts(keyword, currentPage)); // Dispatch with keyword and currentPage
     }, [dispatch, error, hasErrorToast, currentPage, keyword]); // Added keyword to dependencies
 
@@ -40,10 +31,7 @@ const Home = () => {
 
     return (
         <Fragment>
-            <Toaster 
-                position="top-right" 
-                limit={1} // Display only one toast at a time
-            />
+            <Toaster position="top-center" />
             {loading ? (
                 <Loader />
             ) : error ? (

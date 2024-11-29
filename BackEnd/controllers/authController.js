@@ -219,17 +219,18 @@ exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
 
 //get specific User details => /api/v1/users/:id
 exports.getUserDetails = catchAsyncErrors( async (req, res, next) => {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).select('name email store role createdAt avatar');  // Include store field in the select query
 
     if(!user){
-        return next(new errorHandler(`User with ID: ${req.params.id} not found Please Try Again`))
+        return next(new errorHandler(`User with ID: ${req.params.id} not found. Please try again.`));
     }
 
     res.status(200).json({
         success: true,
         user
-    })
-})
+    });
+});
+
 
 
 

@@ -9,6 +9,8 @@ import {
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
     LOAD_USER_FAILED,
+    LOGOUT_SUCCESS,
+    LOGOUT_FAILED,
     CLEAR_ERRORS,
 } from '../constants/userConstants';
 
@@ -103,6 +105,28 @@ export const loadUser = (userData) => async (dispatch) => {
     }
 };
 
+//logout user
+export const logout = (userData) => async (dispatch) => {
+    try {
+        // Send registration request with the user data
+        await axios.get('/api/v1/logout');
+
+        // Dispatch success action if registration is successful
+        dispatch({
+            type: LOGOUT_SUCCESS,
+        });
+    } catch (error) {
+        // Dispatch failed action with error message if registration fails
+        const errorMessage = error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message; // Fallback to generic error message if none exists
+
+        dispatch({
+            type: LOGOUT_FAILED,
+            payload: errorMessage, // Capturing the error message
+        });
+    }
+};
 // Clear errors action
 export const clearErrors = () => (dispatch) => {
     dispatch({

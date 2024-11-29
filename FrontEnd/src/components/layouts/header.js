@@ -3,6 +3,7 @@ import { Route, Link} from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { toast, Toaster } from 'sonner';
+import { logout } from '../../actions/userActions'
 
 import '../../App.css'
 
@@ -10,10 +11,16 @@ const Header = () => {
 
     const dispatch = useDispatch();
     
-    const { user, loading } 
+    const { user, loading } = useSelector( state => state.auth )
+
+    const logouthandler = () => {
+        dispatch(logout());
+        toast.success('Logged out successfully');
+    }
 
   return (
     <Fragment>
+        
         <div className="navbar navbar-fluid">
             <div className="brand">
                 <a href="/" className="company">MENTE INC.</a>
@@ -25,14 +32,56 @@ const Header = () => {
                 <a href="/contact" className='me-2'>Contact</a>
             </div>
 
+                
+            
             <div className="image-div">
                 {/* <Link to="/login"><img src="/images/User.svg" alt="User profile"/></Link> */}
-                <Link to="/login" type="button" className="btn btn-outline-dark py-1">Login</Link>
 
+                <Link to="/cart" style={{ textDecoration: 'none' }}>
                 <span className="cart-span">
                     <a href="/cart"><img src="/images/Cart.svg" alt="Shopping cart"/></a>
                     <div className="cart-count">0</div>
                 </span>
+                </Link>
+
+                {user ? (
+
+                    // <div className="ml-4 dropdown d-inline">
+                    //     <Link to="!#" className="btn dropdown-toggle text-dark"
+                    //     type='button' id='dropDownMenuButton' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    //        <figure className="avatar avatar-nav" >
+                    //         <img 
+                    //             src="/images/User.svg" alt={user && user.name} 
+                    //             className='round-circle'
+                    //         />
+                    //         </figure> 
+                    //         <span>{user && user.name}</span>
+                    //     </Link>
+                    // </div>
+
+                    <Link>
+                    <div className="dropdown">
+                    <button className="dropdown1 btn btn-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {user && user.name}
+                    </button>
+                    <ul className="dropdown-menu text-black">
+
+                        {user && user.role !== 'admin' ? (
+                            <li><Link className="dropdown-item fs-6" to="/orders/me">Orders</Link></li>
+                        ): (
+                            <li><Link className="dropdown-item fs-6" to="/dashboard">Dashboard</Link></li>
+                        )}
+                    <li><Link className="dropdown-item fs-6" to="/me">Profile</Link></li>
+                    <li><Link className="dropdown-item fs-6" to="/" onClick={logouthandler}>Logout</Link></li>
+                    </ul>
+                    </div>
+                    </Link>
+
+                ) : !loading && <Link to="/login" type="button" className="btn btn-outline-dark py-1 me-5">Login</Link> }  
+
+                
+                
+                
             </div>
         </div>
     </Fragment>
