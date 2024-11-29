@@ -9,25 +9,25 @@ const sendEmail = require('../utils/sendEmail');
 
 const crypto = require('crypto');
 
+const cloudinary = require('cloudinary').v2;
+
 /*register a user => /api/v1/register 
 ito is pang authenticate ng mga info na binigay ng user sa pag reregister at pang register naden mismo*/
-exports.registerUser = catchAsyncErrors( async (req, res, next) => {
+exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
     const { name, email, password, store } = req.body;
 
+    // Create the user without avatar
     const user = await User.create({
         name,
         email,
         password, 
-        store,
-        avatar: {
-            public_id: 'users/vgtxrlm9453yi2tijzqk',
-            url: 'https://res.cloudinary.com/dnmawrba8/image/upload/v1731847500/users/vgtxrlm9453yi2tijzqk.jpg'
-        }
-    })
-    sendToken(user, 200, res)
-})
+        store
+    });
 
+    // Send token back to user
+    sendToken(user, 200, res);
+});
 
 //login a user => /api/v1/login
 /* ito is para sa user login and sa authentication ng logins */

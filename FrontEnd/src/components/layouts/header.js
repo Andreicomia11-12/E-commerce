@@ -1,9 +1,17 @@
 import React, { Fragment } from 'react';
 import { Route, Link} from 'react-router-dom';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { toast, Toaster } from 'sonner';
+
 import '../../App.css'
 
 const Header = () => {
+
+    const dispatch = useDispatch();
+    
+    const { user, loading } 
+
   return (
     <Fragment>
         <div className="navbar navbar-fluid">
@@ -18,7 +26,9 @@ const Header = () => {
             </div>
 
             <div className="image-div">
-                <Link to="/login"><img src="/images/User.svg" alt="User profile"/></Link>
+                {/* <Link to="/login"><img src="/images/User.svg" alt="User profile"/></Link> */}
+                <Link to="/login" type="button" className="btn btn-outline-dark py-1">Login</Link>
+
                 <span className="cart-span">
                     <a href="/cart"><img src="/images/Cart.svg" alt="Shopping cart"/></a>
                     <div className="cart-count">0</div>
