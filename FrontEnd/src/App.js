@@ -21,6 +21,10 @@ import ForgotPassword from './components/user/ForgotPassword';
 import NewPassword from './components/user/NewPassword';
 import OrderDetails from './components/order/OrderDetails';
 
+// Admin Imports
+import Dashboard from './components/admin/Dashboard';
+
+
 import store from './store';
 
 function App() {
@@ -54,6 +58,8 @@ function App() {
             <Route path="/password/reset/:token" element={<NewPassword />} />
             <Route path="/orders/me" element={<ListOrders />} />
             <Route path="/order/:id" element={<OrderDetails  />} />
+
+            <Route path="/dashboard/" isAdmin={true} element={<Dashboard />} />
           </Routes>
 
         </div>

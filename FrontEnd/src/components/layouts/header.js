@@ -75,7 +75,7 @@ const Header = () => {
                     </div>
                     </Link>
 
-                ) : !loading && <Link to="/login" type="button" className="btn btn-outline-dark py-1 me-5">Login</Link> }   
+                ) : !loading && <Link to="/login" type="button" className="btn btn-outline-dark login-button py-1 me-5">Login</Link> }   
                 
             </div>
         </div>

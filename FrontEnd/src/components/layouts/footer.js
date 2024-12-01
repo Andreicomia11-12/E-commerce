@@ -13,9 +13,9 @@ const footer = () => {
                         <div className="row">
                         {/* Grid column */}
                         <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                            <h6 className="text-uppercase mb-4 font-weight-bold">Company name</h6>
+                            <h6 className="text-uppercase mb-4 font-weight-bold">Mente Exceptional Inc</h6>
                             <p>
-                            Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Mente Excepcional is a private corporation that sells, markets and distributes FMCG products, namely Nutriasia, in various areas in Luzon
                             </p>
                         </div>
                         {/* Grid column */}
@@ -37,10 +37,10 @@ const footer = () => {
                         {/* Grid column */}
                         <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
                             <h6 className="text-uppercase mb-4 font-weight-bold">Useful links</h6>
-                            <p><a href="/" className="text-white">Your Account</a></p>
-                            <p><a href="/" className="text-white">Become an Affiliate</a></p>
-                            <p><a href="/" className="text-white">Shipping Rates</a></p>
-                            <p><a href="/" className="text-white">Help</a></p>
+                            <p><a href="/" className="text-dark ">Facebook</a></p>
+                            <p><a href="/" className="text-dark">Instagram</a></p>
+                            <p><a href="/" className="text-dark">Shipping Rates</a></p>
+                            <p><a href="/" className="text-dark">Help</a></p>
                         </div>
 
                         {/* Grid column */}
@@ -69,7 +69,7 @@ const footer = () => {
                         <div className="col-md-7 col-lg-8 text-center text-md-start">
                             {/* Copyright */}
                             <div className="p-3">
-                            © 2020 Copyright:
+                            © 2024: Cram Crew
                             <a href="https://mdbootstrap.com/" className="text-white">MDBootstrap.com</a>
                             </div>
                             {/* Copyright */}
