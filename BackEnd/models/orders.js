@@ -20,8 +20,8 @@ const orderSchema = mongoose.Schema({
         },
         country: {
             type: String,
-            required: true
-        }
+            default: 'Philippines',
+        },      
     },
     user:{
         type: mongoose.Schema.Types.ObjectId,

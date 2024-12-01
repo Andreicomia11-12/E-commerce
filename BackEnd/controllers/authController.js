@@ -81,7 +81,7 @@ exports.forgotPassword = catchAsyncErrors( async (req, res, next) =>{
 
     //create reset password url 
 
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`;
+    const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
     const message = `Reset Password token:\n\n${resetUrl}\n\nif you have not requested this email, then please ignore it.`
 
@@ -118,6 +118,7 @@ exports.resetPassword = catchAsyncErrors( async (req, res, next) =>{
         resetPasswordToken,
         resetPasswordExpire: { $gt: Date.now() }
     })
+    
 
 
     if(!user){
@@ -166,6 +167,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
     await user.save();
 
     sendToken(user, 200, res)
+
 })
 
 //Update user profile => /api/v1/me/update 

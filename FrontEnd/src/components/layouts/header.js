@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { toast, Toaster } from 'sonner';
+import { toast } from 'sonner';
 import { logout } from '../../actions/userActions'
 
 import '../../App.css'
@@ -12,6 +12,7 @@ const Header = () => {
     const dispatch = useDispatch();
     
     const { user, loading } = useSelector( state => state.auth )
+    const { cartItems } = useSelector( state => state.cart)
 
     const logouthandler = () => {
         dispatch(logout());
@@ -21,7 +22,7 @@ const Header = () => {
   return (
     <Fragment>
         
-        <div className="navbar navbar-fluid">
+        <div className="navbar navbar-fluid fixed-top">
             <div className="brand">
                 <a href="/" className="company">MENTE INC.</a>
             </div>  
@@ -40,7 +41,7 @@ const Header = () => {
                 <Link to="/cart" style={{ textDecoration: 'none' }}>
                 <span className="cart-span">
                     <a href="/cart"><img src="/images/Cart.svg" alt="Shopping cart"/></a>
-                    <div className="cart-count">0</div>
+                    <div className="cart-count">{cartItems.length}</div>
                 </span>
                 </Link>
 
@@ -66,21 +67,15 @@ const Header = () => {
                     </button>
                     <ul className="dropdown-menu text-black">
 
-                        {user && user.role !== 'admin' ? (
-                            <li><Link className="dropdown-item fs-6" to="/orders/me">Orders</Link></li>
-                        ): (
-                            <li><Link className="dropdown-item fs-6" to="/dashboard">Dashboard</Link></li>
-                        )}
+                        <li><Link className="dropdown-item fs-6" to="/dashboard">Dashboard</Link></li>
+                        <li><Link className="dropdown-item fs-6" to="/orders/me">Orders</Link></li>
                     <li><Link className="dropdown-item fs-6" to="/me">Profile</Link></li>
                     <li><Link className="dropdown-item fs-6" to="/" onClick={logouthandler}>Logout</Link></li>
                     </ul>
                     </div>
                     </Link>
 
-                ) : !loading && <Link to="/login" type="button" className="btn btn-outline-dark py-1 me-5">Login</Link> }  
-
-                
-                
+                ) : !loading && <Link to="/login" type="button" className="btn btn-outline-dark py-1 me-5">Login</Link> }   
                 
             </div>
         </div>

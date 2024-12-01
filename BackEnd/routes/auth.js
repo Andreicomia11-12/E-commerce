@@ -26,7 +26,7 @@ router.route('/password/reset/:token').patch(resetPassword);
 
 router.route('/logout').get(logout);
 router.route('/me').get(isAuthenticatedUser, getUserProfile);
-router.route('/password/update').patch(isAuthenticatedUser, updatePassword);
+router.route('/password/update').post(isAuthenticatedUser, updatePassword);
 router.route('/me/update').patch(isAuthenticatedUser, updateProfile);
 router.route('/admin/users').get(isAuthenticatedUser, authorizedRoles('admin'), getAllUsers);
 router.route('/admin/user/:id')
