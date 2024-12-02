@@ -44,7 +44,8 @@ const Cart = () => {
           <h2 className="mt-5">Your Cart is Empty</h2>
         ) : (
           <Fragment>
-            <div className="container my-4">
+            <div className="cart-tainer">
+            <div className="container my-4 ">
               <h2 className="mt-5">
                 Your Cart: <b>{cartItems.length} items</b>
               </h2>
@@ -60,7 +61,7 @@ const Cart = () => {
                             <img
                               src={item.image}
                               alt={item.name}
-                              className="img-fluid"
+                              className="imag1 img-fluid"
                             />
                           </div>
 
@@ -129,6 +130,7 @@ const Cart = () => {
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           </Fragment>
         )

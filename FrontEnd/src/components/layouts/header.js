@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
@@ -10,7 +10,8 @@ import '../../App.css'
 const Header = () => {
 
     const dispatch = useDispatch();
-    
+    const navigate = useNavigate();
+
     const { user, loading } = useSelector( state => state.auth )
     const { cartItems } = useSelector( state => state.cart)
 
@@ -18,6 +19,12 @@ const Header = () => {
         dispatch(logout());
         toast.success('Logged out successfully');
     }
+
+    const loginHandler = (e) => {
+        e.preventDefault(); 
+        navigate('/login');
+    };
+    
 
   return (
     <Fragment>
@@ -27,10 +34,10 @@ const Header = () => {
                 <a href="/" className="company">MENTE INC.</a>
             </div>  
             <div className="menu">
-                <a href="/home" className='me-2'>Home</a>
-                <a href="/about" className='me-2'>About</a>
-                <a href="/shop" className='me-2'>Shop</a>
-                <a href="/contact" className='me-2'>Contact</a>
+                <a href="/" className='me-2'>Home</a>
+                <a href="#about" className='me-2'>About</a>
+                <a href="#products_heading" className='me-2'>Shop</a>
+                <a href="https://www.facebook.com/p/Mente-Excepcional-Online-Distribution-100064192950806/" className='me-2'>Contact</a>
             </div>
 
                 
@@ -75,7 +82,7 @@ const Header = () => {
                     </div>
                     </Link>
 
-                ) : !loading && <Link to="/login" type="button" className="btn btn-outline-dark login-button py-1 me-5">Login</Link> }   
+                ) : !loading && <button type="button" className="btn btn-outline-dark login-button py-1 me-5" onClick={loginHandler}>Login</button> }   
                 
             </div>
         </div>

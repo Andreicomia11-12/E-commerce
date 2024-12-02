@@ -4,7 +4,7 @@ import '../css/footer.css'
 const footer = () => {
   return (
     <Fragment>
-                <footer className="text-center text-lg-start text-dark">
+                <footer id='about' className="text-center text-lg-start text-dark">
                     {/* Grid container */}
                     <div className="container p-4 pb-0">
                     {/* Section: Links */}

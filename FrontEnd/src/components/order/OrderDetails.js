@@ -74,31 +74,19 @@ const OrderDetails = () => {
                     <h4 className="my-4">Order Items:</h4>
                     <hr />
                     <div className="cart-item my-1">
-                        {orderItems?.map((item) => (
-                            <div key={item.product} className="row my-5">
-                                <div className="col-4 col-lg-2">
-                                    <img
-                                        src={item.image}
-                                        alt={item.name}
-                                        height="45"
-                                        width="65"
-                                    />
-                                </div>
-
-                                <div className="col-5 col-lg-5">
-                                    <Link to={`/products/${item.product}`}>{item.name}</Link>
-                                </div>
-
-                                <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                                    <p>${item.price}</p>
-                                </div>
-
-                                <div className="col-4 col-lg-3 mt-4 mt-lg-0">
-                                    <p>{item.quantity} Piece(s)</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                    {orderItems?.map((item) => (
+    <div key={item.product} className="row my-5">
+        <div className="col-5 col-lg-5">
+            <Link to={`/products/${item.product}`}>{item.name}</Link>
+        </div>
+        <div className="col-4 col-lg-2 mt-4 mt-lg-0">
+            <p>${item.price}</p>
+        </div>
+        <div className="col-4 col-lg-3 mt-4 mt-lg-0">
+            <p>{item.quantity} Piece(s)</p>
+        </div>
+    </div>
+))}                    </div>
                     <hr />
                 </div>
             </div>

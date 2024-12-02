@@ -7,7 +7,7 @@ function product( {product} ) {
   return (
     <Fragment>
         <div className="col-sm-12 col-md-6 col-lg-3 my-3">
-                    <div className="card p-3 rounded product-container">
+                    <div className="card p-3 rounded product-container" >
                         <img
                             className="card-img-top mx-auto product-image"
                             src={product.images[0]?.url} // Use the first image or fallback to a default
