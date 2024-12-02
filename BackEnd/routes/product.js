@@ -5,13 +5,16 @@ const { getProducts,
         newProduct, 
         getSingleProduct, 
         updateProduct, 
-        deleteProduct
+        deleteProduct,
+        getAdminProducts
 
 } = require('../controllers/productController')
 
 const { isAuthenticatedUser, authorizedRoles } = require('../middlewares/auth')
 
 router.route('/products').get(getProducts);
+
+router.route('/admin/products').get(getAdminProducts);
 
 router.route('/product/:id').get(getSingleProduct);
 
