@@ -10,27 +10,18 @@ import { getProducts } from '../actions/productActions';
 
 import Product from './product/Product';
 import Loader from './layouts/loader';
-import { toast, Toaster } from 'sonner'; // Import Sonner
+import { Toaster } from 'sonner'; // Import Sonner
 
 const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
     const dispatch = useDispatch();
     const { loading, products, error, productsCount, resPerPage } = useSelector((state) => state.products);
-    const [hasErrorToast, setHasErrorToast] = useState(false); // Track if error toast is shown
+    const [hasErrorToast] = useState(false); // Track if error toast is shown
 
     const { keyword = "" } = useParams(); // Use useParams for React Router v6
 
     useEffect(() => {
-        if (error && !hasErrorToast) {
-            toast.error(`Error: ${error}`, {
-                duration: Infinity, // Make the toast stay until dismissed
-                style: {
-                    zIndex: 9999,
-                },
-            });
-            setHasErrorToast(true); // Ensure the toast doesn't re-trigger
-        }
         dispatch(getProducts(keyword, currentPage)); // Dispatch with keyword and currentPage
     }, [dispatch, error, hasErrorToast, currentPage, keyword]); // Added keyword to dependencies
 
@@ -40,10 +31,7 @@ const Home = () => {
 
     return (
         <Fragment>
-            <Toaster 
-                position="top-right" 
-                limit={1} // Display only one toast at a time
-            />
+            <Toaster position="top-center" />
             {loading ? (
                 <Loader />
             ) : error ? (
@@ -55,12 +43,12 @@ const Home = () => {
                 <Fragment>
                     <MetaData title={'Homepage'} />
                     <div className="container-1">
-                        <div className="hero-section">
-                            <div className="hero-content">
+                        <div className="hero-section ">
+                            <div className="hero-content ">
                                 <div className="hero-inside">
                                     <h1>Mente Exceptional</h1>
                                     <p>"Mente Exceptional Inc. is a vibrant e-commerce platform offering exceptional products and a seamless shopping experience to meet diverse customer needs."</p>
-                                    <button className="btn-shop-now">SHOP NOW</button>
+                                    
                                 </div>
                             </div>
                         </div>

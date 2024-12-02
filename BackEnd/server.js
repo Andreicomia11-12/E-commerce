@@ -1,6 +1,6 @@
 const app = require('./app')
 const connectDatabase = require('./config/database')
-
+const cloudinary = require('cloudinary').v2; 
 const dotenv = require('dotenv')
 const cors = require('cors')
 
@@ -17,6 +17,12 @@ dotenv.config({path: 'BackEnd/config/.env'})
 
 //Here I connect to the database
 connectDatabase();
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
 const server = app.listen(process.env.PORT, () =>{
     console.log(`Listening on Port: ${process.env.PORT} and currently in ${process.env.NODE_ENV}`)

@@ -84,8 +84,8 @@ exports.allOrders = catchAsyncErrors(async (req, res, next) => {
 exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
     const order = await Order.findById(req.params.id);
 
-    if(order.orderStatus === 'Delivered'){
-        return next(new errorHandler('You have already delivered this Order'))
+    if(order.orderStatus === 'Approved'){
+        return next(new errorHandler('This Error is already Approved'))
     }
 
     order.orderItems.forEach(async item => {

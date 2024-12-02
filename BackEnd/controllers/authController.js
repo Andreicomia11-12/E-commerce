@@ -9,25 +9,25 @@ const sendEmail = require('../utils/sendEmail');
 
 const crypto = require('crypto');
 
+const cloudinary = require('cloudinary').v2;
+
 /*register a user => /api/v1/register 
 ito is pang authenticate ng mga info na binigay ng user sa pag reregister at pang register naden mismo*/
-exports.registerUser = catchAsyncErrors( async (req, res, next) => {
+exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
     const { name, email, password, store } = req.body;
 
+    // Create the user without avatar
     const user = await User.create({
         name,
         email,
         password, 
-        store,
-        avatar: {
-            public_id: 'users/vgtxrlm9453yi2tijzqk',
-            url: 'https://res.cloudinary.com/dnmawrba8/image/upload/v1731847500/users/vgtxrlm9453yi2tijzqk.jpg'
-        }
-    })
-    sendToken(user, 200, res)
-})
+        store
+    });
 
+    // Send token back to user
+    sendToken(user, 200, res);
+});
 
 //login a user => /api/v1/login
 /* ito is para sa user login and sa authentication ng logins */
@@ -81,7 +81,7 @@ exports.forgotPassword = catchAsyncErrors( async (req, res, next) =>{
 
     //create reset password url 
 
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`;
+    const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
     const message = `Reset Password token:\n\n${resetUrl}\n\nif you have not requested this email, then please ignore it.`
 
@@ -118,6 +118,7 @@ exports.resetPassword = catchAsyncErrors( async (req, res, next) =>{
         resetPasswordToken,
         resetPasswordExpire: { $gt: Date.now() }
     })
+    
 
 
     if(!user){
@@ -166,6 +167,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
     await user.save();
 
     sendToken(user, 200, res)
+
 })
 
 //Update user profile => /api/v1/me/update 
@@ -219,17 +221,18 @@ exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
 
 //get specific User details => /api/v1/users/:id
 exports.getUserDetails = catchAsyncErrors( async (req, res, next) => {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).select('name email store role createdAt avatar');  // Include store field in the select query
 
     if(!user){
-        return next(new errorHandler(`User with ID: ${req.params.id} not found Please Try Again`))
+        return next(new errorHandler(`User with ID: ${req.params.id} not found. Please try again.`));
     }
 
     res.status(200).json({
         success: true,
         user
-    })
-})
+    });
+});
+
 
 
 

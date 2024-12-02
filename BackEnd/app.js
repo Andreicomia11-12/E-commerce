@@ -2,13 +2,21 @@ const express = require('express');
 const app = express();
 
 const cookieParser = require('cookie-parser');
+const bodyparser = require('body-parser');
+
+const fileUpload = require('express-fileupload');
+
 
 const errorMiddleware = require('./middlewares/errors')
 const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser())
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(fileUpload());
+
+//setting up cloudinary 
 
 
 //import all the routes 
