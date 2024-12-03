@@ -35,7 +35,7 @@ const Sidebar = () => {
               </Link>
             </li>
             <li>
-              <Link className="dropdown-item" to="/admin/product">
+              <Link className="dropdown-item" to="/admin/product/new">
                 <i className="fa fa-plus"></i> Create
               </Link>
             </li>
@@ -49,19 +49,6 @@ const Sidebar = () => {
           </Link>
         </li>
 
-        {/* Users Link */}
-        <li>
-          <Link to="/admin/users">
-            <i className="fa fa-users"></i> Users
-          </Link>
-        </li>
-
-        {/* Reviews Link */}
-        <li>
-          <Link to="/admin/reviews">
-            <i className="fa fa-star"></i> Reviews
-          </Link>
-        </li>
       </ul>
     </nav>
   </div>

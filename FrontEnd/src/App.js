@@ -21,6 +21,9 @@ import ForgotPassword from './components/user/ForgotPassword';
 import NewPassword from './components/user/NewPassword';
 import OrderDetails from './components/order/OrderDetails';
 
+import ProductList from './components/admin/ProductsList';
+import NewProduct from './components/admin/newProduct';
+import OrderList from './components/admin/OrderList';
 // Admin Imports
 import Dashboard from './components/admin/Dashboard';
 
@@ -59,7 +62,10 @@ function App() {
             <Route path="/orders/me" element={<ListOrders />} />
             <Route path="/order/:id" element={<OrderDetails  />} />
 
-            <Route path="/dashboard/" isAdmin={true} element={<Dashboard />} />
+            <Route path="/dashboard" isAdmin={true} element={<Dashboard />} />
+            <Route path="/admin/products" isAdmin={true} element={<ProductList />} />
+            <Route path="/admin/product/new" isAdmin={true} element={<NewProduct />} />
+            <Route path="/admin/orders" isAdmin={true} element={<OrderList />} />
           </Routes>
 
         </div>

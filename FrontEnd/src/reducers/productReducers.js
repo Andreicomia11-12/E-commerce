@@ -2,47 +2,103 @@ import {
     ALL_PRODUCTS_REQUEST, 
     ALL_PRODUCTS_SUCCESS, 
     ALL_PRODUCTS_FAIL,
+    ADMIN_PRODUCTS_REQUEST,
+    ADMIN_PRODUCTS_SUCCESS,
+    ADMIN_PRODUCTS_FAIL,
+    DELETE_PRODUCT_REQUEST,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_RESET,
+    DELETE_PRODUCT_FAIL,
+    NEW_PRODUCT_REQUEST,
+    NEW_PRODUCT_SUCCESS,
+    NEW_PRODUCT_RESET,
+    NEW_PRODUCT_FAIL,
     PRODUCT_DETAILS_REQUEST,
-    PRODUCT_DETAILS_SUCCESS, 
+    PRODUCT_DETAILS_SUCCESS,    
     PRODUCT_DETAILS_FAIL,
     CLEAR_ERRORS
 } from '../constants/productConstants';
 
-export const productsReducer = (state = { products: [], productsCount: 0 }, action) => {
+export const productsReducer = (state = { products: [] }, action) => {
     switch (action.type) {
         case ALL_PRODUCTS_REQUEST:
+        case ADMIN_PRODUCTS_REQUEST:
             return {
-                ...state, // Preserve existing state if needed
                 loading: true,
-                error: null, // Clear any previous errors
-            };
+                products: []
+            }
 
-            case ALL_PRODUCTS_SUCCESS:
-                return {
-                    ...state,
-                    loading: false,
-                    products: action.payload.products,
-                    productsCount: action.payload.productsCount, // Total number of products
-                    resPerPage: action.payload.resPerPage,
-                };
-            
-        case ALL_PRODUCTS_FAIL:
+        case ALL_PRODUCTS_SUCCESS:
             return {
-                ...state,
                 loading: false,
-                error: action.payload, // Error message from the action
-            };
+                products: action.payload.products,
+                productsCount: action.payload.productsCount,
+                resPerPage: action.payload.resPerPage,
+                filteredProductsCount: action.payload.filteredProductsCount
+            }
+
+        case ADMIN_PRODUCTS_SUCCESS:
+            return {
+                loading: false,
+                products: action.payload
+            }
+
+        case ALL_PRODUCTS_FAIL:
+        case ADMIN_PRODUCTS_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
 
         case CLEAR_ERRORS:
             return {
                 ...state,
-                error: null, // Clear errors from the state
-            };
+                error: null
+            }
 
         default:
             return state;
     }
 };
+
+export const newProductReducer = (state = { product: {} }, action) => {
+    switch (action.type) {
+
+        case NEW_PRODUCT_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case NEW_PRODUCT_SUCCESS:
+            return {
+                loading: false,
+                success: action.payload.success,
+                product: action.payload.product
+            }
+
+        case NEW_PRODUCT_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case NEW_PRODUCT_RESET:
+            return {
+                ...state,
+                success: false
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
 // In productReducers.js
 export const productDetailsReducer = (state = { product: {} }, action) => {
     switch (action.type) {
@@ -76,3 +132,43 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
             return state;
     }
 };
+
+
+export const productReducer = (state = {}, action) => {
+    switch (action.type) {
+
+        case DELETE_PRODUCT_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case DELETE_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isDeleted: action.payload
+            }
+        case DELETE_PRODUCT_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case DELETE_PRODUCT_RESET:
+            return {
+                ...state,
+                isDeleted: false
+            }
+
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
