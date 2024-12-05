@@ -135,8 +135,7 @@ const Cart = () => {
           </Fragment>
         )
       ) : (
-        // If not authenticated, show a message
-        <h2 className="mt-5">Please log in to view your cart</h2>
+        <h2 className="Authenticate-1">Please log in to view your cart</h2>
       )}
     </Fragment>
   );

@@ -123,6 +123,11 @@ body {
   height: auto;
 }
 
+.Authenticate-1 {
+  margin-top: 300px;
+  text-align: center;
+}
+
 .incomplete {
   background: #eeeeee;
 }
@@ -168,6 +173,9 @@ body {
   margin-right: -1px;
 }
 
+.register1 {
+  margin-top: 100px;
+}
 
 /* Cart */
 

@@ -81,7 +81,7 @@ const Register = () => {
         <Fragment>
             <MetaData title={'Register'} />
 
-            <div className="row wrapper">
+            <div className="row wrapper register1">
                 <div className="col-10 col-lg-5">
                     <form className="shadow-lg" onSubmit={submitHandler} encType="multipart/form-data">
                         <h1 className="mb-3">Register</h1>

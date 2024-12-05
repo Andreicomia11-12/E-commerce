@@ -1,3 +1,8 @@
 {
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "editor.cursorStyle": "line",
+    "editor.cursorBlinking": "blink",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorSurroundingLines": 100000,
+    "editor.cursorWidth": 2
 }

@@ -43,8 +43,6 @@ exports.loginUser = catchAsyncErrors( async (req, res, next) => {
     Ang process dito is if nag enter ang user ng email at password is tsaka lang hahanapin ng 
     function yung user sa database
     */
-
-
     //find user by email and password
     const user = await User.findOne({ email }).select('+password')
 
@@ -83,7 +81,7 @@ exports.forgotPassword = catchAsyncErrors( async (req, res, next) =>{
 
     const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
-    const message = `Reset Password token:\n\n${resetUrl}\n\nif you have not requested this email, then please ignore it.`
+    const message = `Reset Password token:\n\n${resetUrl}\n\nif you have not requested this email, then please ignore it.`;
 
     try{
        
